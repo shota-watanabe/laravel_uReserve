@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LivewireTestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,12 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+// Laravel9から、controllerでまとめることができる
+Route::controller(LivewireTestController::class)
+->prefix('livewire-test')->name('livewire-test.')->group(function(){
+  // Route::get(呼ばれるviewファイル, 呼び出すメソッド);
+  Route::get('index', 'index')->name('index');
+  Route::get('register', 'register')->name('register');
 });
